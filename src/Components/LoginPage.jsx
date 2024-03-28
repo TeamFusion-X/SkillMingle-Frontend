@@ -1,6 +1,10 @@
+
 import React from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [post, setPost] = useState({
@@ -14,7 +18,13 @@ const LoginForm = () => {
     e.preventDefault();
     axios
       .post("/api/users/login", { ...post })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        if (response.data && response.data.token) {
+          Cookies.set("jwt", response.data.token, { expires: 7 });
+          navigator("/dashboard");
+        }
+      })
       .catch((err) => console.log(err));
   }
   return (
@@ -26,7 +36,7 @@ const LoginForm = () => {
             Login
           </button>
           <button className="text-blue-500 rounded px-4 py-1 focus:outline-none">
-            Signup
+            <Link to="/signup">Sign up</Link>
           </button>
         </div>
         <button className="bg-blue-500 text-white rounded py-2 px-4 mb-4 w-full flex items-center justify-center">
