@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <div className="container">
-      {/* Navbar */}
       <nav className="flex justify-between items-center py-">
         <div className="text-2xl font-bold">LOGO</div>
         <div className="flex space-x-4">
@@ -28,16 +28,15 @@ const Home = () => {
         </div>
         <div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-            Login
+            <Link to="/login">Login</Link>
           </button>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-5 py-2 px-4 rounded transition duration-300">
-            Sign up
+            <Link to="/signup">Sign up</Link>
           </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="text-center my-10">
+      <header className=" flex flex-col justify-between align-left items-start my-10">
         <h1 className="text-4xl font-bold text-gray-800">
           Connect Your Skills
         </h1>
@@ -54,7 +53,6 @@ const Home = () => {
         </button>
       </header>
 
-      {/* User Reviews */}
       <section className="my-10">
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-gray-100 p-4">
@@ -67,7 +65,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Trending Skills */}
       <section className="my-10">
         <h3 className="text-2xl font-bold text-gray-800 text-center mb-6">
           Trending Skills
@@ -83,7 +80,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="text-center my-10">
         <p className="text-gray-600">
           © 2024 SkillMingle. All rights reserved.

@@ -1,5 +1,9 @@
+// @ts-ignore
 import axios from "axios";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
+// @ts-ignore
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [post, setPost] = useState({
@@ -9,6 +13,7 @@ const RegistrationForm = () => {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setPost({
@@ -21,12 +26,21 @@ const RegistrationForm = () => {
     e.preventDefault();
     axios
       .post("/api/users/signup", { ...post })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        // Assuming the JWT token is in the response data under 'token'
+        if (response.data && response.data.token) {
+          // Store the token in cookies
+          Cookies.set("jwt", response.data.token, { expires: 7 }); // Expires in 7 days
+          // Redirect to dashboard page
+          navigate("/dashboard");
+        }
+      })
       .catch((err) => console.log(err));
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center max-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white shadow-lg">
         <h1 className="text-2xl font-bold text-center">SKILLMINGLE</h1>
 
