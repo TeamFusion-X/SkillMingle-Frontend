@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       {/* <HomePage/> */}
-      {/* <LoginForm /> */}
-      <RegistrationForm/>
+      <LoginForm />
+      {/* <RegistrationForm/> */}
     </>
   );
 }
